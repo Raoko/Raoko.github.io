@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Romeo Patino — Network Engineering</title>
+<meta name="description" content="Data center technician operating AI/HPC GPU fabric at CoreWeave. CCNA. eBGP Clos fabric lab, network migrations, and incident case studies.">
+<meta property="og:title" content="Romeo Patino — Network Engineering">
+<meta property="og:description" content="AI/HPC datacenter fabric operations, an eBGP Clos lab with CI, and real incident write-ups.">
+<meta property="og:type" content="website">
+<style>
+  :root{
+    --bg:#ffffff; --fg:#1a1d21; --muted:#5b6472; --line:#e3e7ec;
+    --accent:#1d4ed8; --accent-soft:#eef2ff; --card:#f8fafc;
+    --ok:#15803d; --ok-soft:#dcfce7;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --bg:#0f1216; --fg:#e6e9ee; --muted:#9aa4b2; --line:#242a33;
+      --accent:#7aa2ff; --accent-soft:#161d2e; --card:#151a21;
+      --ok:#4ade80; --ok-soft:#10231a;
+    }
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--fg);
+    font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:860px; margin:0 auto; padding:0 20px}
+  a{color:var(--accent); text-decoration:none}
+  a:hover{text-decoration:underline}
+  code{
+    font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+    font-size:.88em; background:var(--card); padding:.12em .4em;
+    border-radius:4px; border:1px solid var(--line);
+  }
+
+  header{padding:64px 0 40px; border-bottom:1px solid var(--line)}
+  h1{margin:0 0 6px; font-size:2.1rem; letter-spacing:-.02em}
+  .tagline{margin:0 0 20px; font-size:1.12rem; color:var(--muted); max-width:60ch}
+  .links{display:flex; flex-wrap:wrap; gap:10px; margin-top:20px}
+  .links a{
+    border:1px solid var(--line); border-radius:8px; padding:7px 14px;
+    font-size:.92rem; color:var(--fg); background:var(--card);
+  }
+  .links a:hover{border-color:var(--accent); color:var(--accent); text-decoration:none}
+
+  section{padding:44px 0; border-bottom:1px solid var(--line)}
+  h2{font-size:1.32rem; margin:0 0 6px; letter-spacing:-.01em}
+  .sub{color:var(--muted); margin:0 0 24px; font-size:.95rem}
+
+  .card{
+    border:1px solid var(--line); border-radius:12px;
+    padding:22px; background:var(--card); margin-bottom:18px;
+  }
+  .card h3{margin:0 0 4px; font-size:1.08rem}
+  .card .meta{color:var(--muted); font-size:.86rem; margin:0 0 12px}
+  .card p{margin:0 0 12px}
+  .card ul{margin:0 0 14px; padding-left:20px}
+  .card li{margin:5px 0}
+  .card .go{display:flex; flex-wrap:wrap; gap:14px; font-size:.92rem; font-weight:600}
+
+  figure{margin:0 0 18px}
+  figure img{
+    width:100%; height:auto; display:block;
+    border:1px solid var(--line); border-radius:10px; background:#fff;
+  }
+  figcaption{color:var(--muted); font-size:.85rem; margin-top:8px; text-align:center}
+
+  .pill{
+    display:inline-block; font-size:.75rem; font-weight:700;
+    padding:3px 9px; border-radius:999px; letter-spacing:.02em;
+  }
+  .pill-ok{background:var(--ok-soft); color:var(--ok)}
+
+  .quote{
+    border-left:3px solid var(--accent); padding:2px 0 2px 16px;
+    margin:16px 0; color:var(--muted); font-style:italic;
+  }
+
+  .grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:8px}
+  .grid span{
+    border:1px solid var(--line); border-radius:7px; padding:7px 11px;
+    font-size:.87rem; background:var(--card);
+  }
+
+  .exp{margin-bottom:22px}
+  .exp h3{margin:0 0 2px; font-size:1rem}
+  .exp .meta{color:var(--muted); font-size:.86rem; margin:0 0 8px}
+  .exp ul{margin:0; padding-left:20px}
+  .exp li{margin:5px 0}
+
+  footer{padding:36px 0 60px; color:var(--muted); font-size:.88rem}
+
+  @media(max-width:600px){
+    header{padding:44px 0 30px}
+    h1{font-size:1.7rem}
+    section{padding:34px 0}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <h1>Romeo Patino</h1>
+    <p class="tagline">
+      Data center technician operating AI/HPC GPU fabric at CoreWeave — InfiniBand,
+      Juniper and Nokia backbone, and a home lab built to close the one gap that
+      hands-on datacenter work leaves open: <strong>control-plane configuration</strong>.
+    </p>
+    <p class="tagline" style="font-size:.95rem">
+      CCNA · Greater Chicago Area · looking for network engineering roles
+    </p>
+    <div class="links">
+      <a href="https://github.com/Raoko">GitHub</a>
+      <a href="https://www.linkedin.com/in/romeo-patino-922b0514a/">LinkedIn</a>
+      <a href="mailto:patinoromeo@gmail.com">Email</a>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <h2>Projects</h2>
+    <p class="sub">Two repositories. Both verified, both public, both with the failures written down.</p>
+
+    <div class="card">
+      <h3>netlab-clos — eBGP Clos fabric <span class="pill pill-ok">CI green</span></h3>
+      <p class="meta">Nokia SR Linux · Containerlab · Python · GitHub Actions</p>
+      <p>
+        A two-spine, four-leaf Clos fabric running an eBGP underlay (RFC 7938), with a
+        unique ASN per device, /31 point-to-point links, and ECMP across both spines.
+      </p>
+      <ul>
+        <li><strong>Configs are generated from a data model</strong>, not hand-written —
+            <code>fabric.yml</code> is the intent, <code>gen_configs.py</code> renders it.
+            The same source-of-truth pattern NetBox-driven pipelines use.</li>
+        <li><strong>CI deploys the real topology on every push</strong> and fails the
+            build unless every BGP session establishes, the leaf installs two ECMP
+            next-hops, and end-to-end ping returns 0% loss.</li>
+        <li><strong>A failure drill with captured output</strong> — kill a spine uplink,
+            next-hops fall 2 → 1, traffic never drops.</li>
+      </ul>
+      <p class="quote">
+        A platform bug during the build was fixed <em>in the generator</em>, never in the
+        rendered config — CI now fails the build if a rendered file drifts from the model.
+      </p>
+      <div class="go">
+        <a href="https://github.com/Raoko/netlab-clos">Repository →</a>
+        <a href="https://raoko.github.io/netlab-clos/">Docs →</a>
+        <a href="https://github.com/Raoko/netlab-clos/blob/main/docs/failure-drill.md">Failure drill →</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>home-netops — network design and incidents</h3>
+      <p class="meta">Omada gateway · managed switch · Proxmox cluster · migration planning</p>
+      <p>
+        Design, migration, and troubleshooting notes for the network the fabric runs on:
+        a four-node Proxmox cluster, a 24-port managed switch, and three access points.
+      </p>
+      <ul>
+        <li>A gateway migration on a live network, planned so that
+            <strong>no device needed re-addressing</strong>.</li>
+        <li>An inherited config <em>audited</em> rather than copied — which surfaced three
+            stale DHCP reservations and a pool spanning the entire subnet.</li>
+        <li>Recovery tooling that reduced the most common failure to a single command.</li>
+      </ul>
+      <div class="go">
+        <a href="https://github.com/Raoko/home-netops">Repository →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Incident write-ups</h2>
+    <p class="sub">Real failures, including the wrong turns. Both share a shape: the most authoritative signal was the one measuring the wrong thing.</p>
+
+    <div class="card">
+      <h3>Four nodes down, every switch port healthy</h3>
+      <p>
+        A four-node cluster vanished from the network while the managed switch reported
+        <code>1G Full</code> on every one of its ports — the signal that normally means
+        "cabling is fine, the machine is broken."
+      </p>
+      <p>
+        Root cause: <strong>Linux names USB NICs from their MAC address</strong>, so
+        relocating an adapter silently renames the interface and orphans the bridge
+        member. The adapter still negotiates link in the PHY, which is why Layer 1 kept
+        insisting everything was fine.
+      </p>
+      <p>
+        Also covers a monitoring bug worth knowing: <strong>Windows <code>ping</code>
+        returns exit code 0 for <code>Destination host unreachable</code></strong>, so a
+        watcher that trusts <code>$?</code> reports dead hosts as alive.
+      </p>
+      <div class="go">
+        <a href="https://github.com/Raoko/home-netops/blob/main/docs/case-study-01-link-up-host-unreachable.md">Read →</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Gateway cutover with no DHCP and no error</h3>
+      <p>
+        Replacing a consumer router with a VLAN-capable gateway on a live network, under
+        a constraint that no device be re-addressed. Two failures, neither of which
+        logged anything anywhere.
+      </p>
+      <ul>
+        <li>The switch was in a <strong>WAN-capable port configured as WAN</strong>, so
+            the gateway treated the entire LAN as an internet connection.</li>
+        <li>The bridge-mode modem was <strong>still bound to the old router's MAC</strong>
+            — diagnosed from a single traceroute hop showing <code>169.254.x</code>.</li>
+      </ul>
+      <p class="quote">
+        The absence of an error message is not evidence that nothing is wrong. It often
+        means the failure is a valid state nobody intended.
+      </p>
+      <div class="go">
+        <a href="https://github.com/Raoko/home-netops/blob/main/docs/case-study-02-gateway-cutover.md">Read →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Diagrams</h2>
+    <p class="sub">The fabric, and the network it runs on.</p>
+    <figure>
+      <img src="img/netlab-fabric.png" alt="eBGP Clos fabric: two spines, four leaves, ECMP paths highlighted" loading="lazy">
+      <figcaption>eBGP Clos fabric — two spines, four leaves, both ECMP paths highlighted</figcaption>
+    </figure>
+    <figure>
+      <img src="img/home-network.png" alt="Home network as built: modem, gateway, managed switch, Proxmox cluster" loading="lazy">
+      <figcaption>Home network as built — gateway, managed switch, four-node Proxmox cluster</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Experience</h2>
+
+    <div class="exp">
+      <h3>CoreWeave — Data Center Technician</h3>
+      <p class="meta">Elk Grove Village, Illinois · 2024–present</p>
+      <ul>
+        <li>Operate AI/HPC GPU fabric across a multi-hall NVIDIA B200/GB300 site —
+            InfiniBand triage at the physical and link layer using UFM, mlxlink and
+            Grafana telemetry.</li>
+        <li>Onsite lead across backbone deployments at the 350 E Cermak carrier hotel,
+            coordinating Digital Realty, Equinix, Juniper and smart-hands vendors.</li>
+        <li>Planned and executed a large patch-cable installation across a four-chassis
+            Juniper PTX10008 row, including the crew-topology and cable-length modelling
+            behind it.</li>
+        <li>Authored the site's backbone, InfiniBand and on-call documentation; built
+            internal CLI tooling that shortened node diagnosis for the team.</li>
+      </ul>
+    </div>
+
+    <div class="exp">
+      <h3>Earlier</h3>
+      <p class="meta">HelloFresh/Factor75 · Intren · Ernst &amp; Young · Exelon · United Airlines</p>
+      <ul>
+        <li>Endpoint management, deployment automation, Splunk SIEM agents under NERC CIP
+            compliance, and field network support across airport hubs.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Technical</h2>
+    <p class="sub">Certifications and the tools behind the work above.</p>
+    <div class="grid" style="margin-bottom:20px">
+      <span><strong>CCNA</strong> · 2026</span>
+      <span>CompTIA Network+</span>
+      <span>CompTIA Security+</span>
+      <span>CompTIA Cloud+</span>
+      <span>CompTIA A+</span>
+      <span>AWS Cloud Practitioner</span>
+      <span>ITIL 4 Foundation</span>
+      <span>LPI Linux Essentials</span>
+    </div>
+    <div class="grid">
+      <span>BGP · ECMP · RFC 7938</span>
+      <span>Nokia SR Linux</span>
+      <span>Juniper PTX</span>
+      <span>InfiniBand · RoCE</span>
+      <span>Containerlab</span>
+      <span>Proxmox VE</span>
+      <span>Linux networking</span>
+      <span>Python · Bash</span>
+      <span>Git · GitHub Actions</span>
+      <span>NetBox</span>
+      <span>Grafana · PromQL</span>
+      <span>Wireshark</span>
+    </div>
+    <p class="sub" style="margin-top:20px">
+      B.S. Information Technology, Western Governors University — in progress.
+    </p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>
+      <a href="https://github.com/Raoko">github.com/Raoko</a> ·
+      <a href="https://www.linkedin.com/in/romeo-patino-922b0514a/">LinkedIn</a> ·
+      <a href="mailto:patinoromeo@gmail.com">patinoromeo@gmail.com</a>
+    </p>
+    <p style="margin-top:6px">Greater Chicago Area</p>
+  </div>
+</footer>
+
+</body>
+</html>
