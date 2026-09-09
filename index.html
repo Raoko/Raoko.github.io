@@ -326,6 +326,35 @@
         <a href="https://github.com/Raoko/netlab-clos/blob/main/docs/failure-drill.md">Failure drill →</a>
       </div>
     </div>
+
+    <div class="card">
+      <h3>Then I built it again by hand, with no generator</h3>
+      <p>A generated config proves the tooling works. It does not prove I can defend a
+      line of it. So I booted three switches with <strong>no configuration at all</strong>
+      and typed every command at the CLI — addressing, network-instances, ASNs, peer
+      groups, neighbours, export policy.</p>
+      <p><strong>It broke three times, and none of them were BGP problems:</strong></p>
+      <ul>
+        <li>The commit was <strong>refused</strong> — <code>address</code> is a list, so a
+        second <code>set</code> appended instead of replacing and one interface held both
+        <code>/31</code>s. That assumption came straight from IOS, where
+        <code>ip address</code> replaces.</li>
+        <li>Session stuck at <code>active</code> — port up, subinterface down,
+        <code>reason no-ip-config</code>. SR Linux has three separate admin-states where
+        IOS has one <code>no shutdown</code>.</li>
+        <li>Ping succeeded and the session still would not come up —
+        <code>connect-retry</code> defaults to <strong>120 seconds</strong>. The generator
+        had been setting it to 5 all along; that line only stopped being noise once I hit
+        the problem myself.</li>
+      </ul>
+      <p>Each was found by reading what the device actually printed and testing one layer
+      at a time from the bottom up. Final result: <code>ttl=61</code> host to host — 64
+      minus the three routers the packet crossed — at 0% loss.</p>
+      <div class="go">
+        <a href="https://github.com/Raoko/netlab-clos/blob/main/docs/hand-build-log.md">The build log →</a>
+        <a href="https://github.com/Raoko/netlab-clos/blob/main/docs/verification.md">Verification output →</a>
+      </div>
+    </div>
   </div>
 </section>
 
