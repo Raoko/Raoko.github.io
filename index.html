@@ -514,7 +514,7 @@ footer{padding:var(--s7) 0 var(--s8); color:var(--muted); font-size:.92rem}
       <summary>How the configs are generated</summary>
       <div class="d-body">
         <p><code>fabric.yml</code> is the intent. <code>gen_configs.py</code> renders all six switch configs from it, deriving the point-to-point addressing rather than hand-listing it. CI regenerates and <strong>fails the build if <code>configs/</code> drifts from the model</strong>.</p>
-        <p>The same source-of-truth pattern a NetBox-driven pipeline uses, in miniature. The rule it enforces: <strong>fix the generator, never the rendered artifact.</strong></p>
+        <p>That model now lives in <strong>NetBox</strong>: the six switches, their ASNs, cables and addressing. <code>gen_configs.py --source netbox</code> reads it over the REST API and renders all six configs <strong>byte-identical</strong> to the YAML version. CI stays on <code>fabric.yml</code>, because the build runner cannot reach the lab. The rule it enforces: <strong>fix the model, never the rendered artifact.</strong></p>
       </div>
     </details>
 
@@ -522,6 +522,7 @@ footer{padding:var(--s7) 0 var(--s8); color:var(--muted); font-size:.92rem}
       <a href="https://github.com/Raoko/netlab-clos">Repository →</a>
       <a href="https://github.com/Raoko/netlab-clos/blob/main/docs/failure-drill.md">The failure drill →</a>
       <a href="https://github.com/Raoko/netlab-clos/blob/main/docs/verification.md">Verification output →</a>
+      <a href="https://github.com/Raoko/netlab-clos/blob/main/docs/netbox-source.md">NetBox source of truth →</a>
     </div>
   </div>
 </section>
